@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Train Ticket Reservation System</title>
+    <style>
+       
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            padding: 20px;
+        }
+        .train-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .train-item {
+            border: 1px solid #ccc;
+            margin-bottom: 10px;
+            padding: 10px;
+        }
+        .seat {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            background-color: #ccc;
+            border: 1px solid #fff;
+            margin: 5px;
+            cursor: pointer;
+        }
+        .selected {
+            background-color: #ff0000;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Ticket Reservation System</h2>
+        <div>
+            <label for="source">Source:</label>
+            <select id="source">
+                <option value="salem">SALEM</option>
+                <option value="chennai">CHENNAI</option>
+                <option value="covai">COVAI</option>
+            </select>
+            <label for="destination">Destination:</label>
+            <select id="destination">
+                <option value="mumbai">MUMBAI</option>
+                <option value="hyderabad">HYDERABAD</option>
+                <option value="benguluru">BENGALURU</option>
+                <!-- Add more cities as needed -->
+            </select>
+            <label for="date">Date:</label>
+            <input type="date" id="date">
+            <button onclick="searchTrains()">Search</button>
+        </div>
+        <div id="trainList"></div>
+    </div>
+
+    <script>
+        function searchTrains() {
+            const trains = [
+                { id: 1, name: "Humsafar Express Train", seats: 50 },
+                { id: 2, name: "Rajdhani Express", seats: 100 },
+                { id: 3, name: "Vande Bharat Express", seats: 150 },
+                { id: 4, name: "Ajanta Express", seats: 110 },
+                { id: 5, name: "Yuva Express", seats: 80 }
+            ];
+
+            const trainList = document.getElementById("trainList");
+            trainList.innerHTML = ""; 
+
+            const source = document.getElementById("source").value;
+            const destination = document.getElementById("destination").value;
+            const date = document.getElementById("date").value;
+
+            trains.forEach(train => {
+                trainList.innerHTML += `
+                    <div class="train-item">
+                        <h3>${train.name}</h3>
+                        <p>Available Seats: ${train.seats}</p>
+                        <button onclick="bookTicket(${train.id}, '${source}', '${destination}', '${date}')">Book</button>
+                    </div>
+                `;
+            });
+        }
+
+        function bookTicket(trainId, source, destination, date) {
+            alert(`Ticket booked for Train ID: ${trainId}, Source: ${source}, Destination: ${destination}, Date: ${date}`);
+        }
+    </script>
+</body>
+</html>
